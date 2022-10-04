@@ -26,13 +26,17 @@ public class BaseTest {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Korisnik\\IdeaProjects\\chromedriver.exe");
         driver = new ChromeDriver();
         //driver.get("https://vue-demo.daniel-avellaneda.com/");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         loginPage = new LoginPage(driver, driverWait);
     }
     @Test
     public void login () {
         driver.get("https://vue-demo.daniel-avellaneda.com/login");
         loginPage.login("admin@admin.com", "12345");
-        //String expectedResult =
+
+        String expectedResult = "Welcome Super Administrator";
+        WebElement actualResult = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]"));
+        Assert.assertEquals(expectedResult, actualResult.getText());
     }
     @Test
     public void displaysErrorsWhenUserDoesNotExist() {
@@ -42,7 +46,7 @@ public class BaseTest {
         String password = faker.internet().password();
 
         loginPage.login(email, password);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
         String expectedResult = "User does not exists";
         WebElement actualResult = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li"));
         Assert.assertEquals(actualResult.getText(), expectedResult);
@@ -67,6 +71,9 @@ public class BaseTest {
         String actualResult1 = loginPage.getPassword().getAttribute("type");
         Assert.assertEquals(actualResult1, expectedResult1);
     }
+
+//    @Test
+//    public void
 
 
 
