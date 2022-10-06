@@ -10,7 +10,7 @@ public class SignupPage extends BasePage {
     private By email = By.id("email");
     private By password = By.id("password");
     private By confirmPassword = By.id("confirmPassword");
-
+    private By signupBtn = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button/span");
 
     public SignupPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
@@ -27,5 +27,25 @@ public class SignupPage extends BasePage {
     }
     public WebElement getConfirmPassword () {
         return getDriver().findElement(confirmPassword);
+    }
+    public WebElement getSignUpBtn () {
+        return getDriver().findElement(signupBtn);
+    }
+
+    public void signup(String name, String email, String password, String confirmPassword) {
+    WebElement nameElement = getName();
+    nameElement.sendKeys(name);
+
+    WebElement emailElement = getEmail();
+    emailElement.sendKeys(email);
+
+    WebElement passwordElement = getPassword();
+    passwordElement.sendKeys(password);
+
+    WebElement confirmPasswordElement = getConfirmPassword();
+    confirmPasswordElement.sendKeys(confirmPassword);
+
+    WebElement signupBtnElement = getSignUpBtn();
+    signupBtnElement.click();
     }
 }
