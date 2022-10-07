@@ -44,7 +44,6 @@ public class SignupTests extends BaseTest {
         signupPage.signup("Test Test", "admin@admin.com", "123654", "123654");
         String expectedResult = "E-mail already exists";
         WebElement actualResult = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/div/div/div/div/div[1]/ul/li"));
-        System.out.println(actualResult.getText());
         Assert.assertEquals(expectedResult, actualResult.getText());
 
         String expectedResult1 = "https://vue-demo.daniel-avellaneda.com/signup";
@@ -55,14 +54,19 @@ public class SignupTests extends BaseTest {
     @Test
     public void signUp() {
         homePage.openSignupPage();
+        Faker faker = new Faker();
+        String name= String.valueOf(faker.name());
+        String email = faker.internet().emailAddress();
+        String password = faker.internet().password();
+        String confirmPassword = password;
 
-        signupPage.signup("Jelena Vasilijevic", "jelena6.vasilijevic@itbootcamp.rs", "123456", "123456");
+        signupPage.signup(name, email, password, confirmPassword);
 
         driverWait.until(ExpectedConditions.textToBe(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"), "IMPORTANT: Verify your account" ));
         WebElement actualResult = driver.findElement(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"));
         String expectedResult = "IMPORTANT: Verify your account";
         Assert.assertEquals(actualResult.getText(), expectedResult);
-
+        //loginPage.logout();
     }
 
 

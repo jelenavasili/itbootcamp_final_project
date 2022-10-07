@@ -12,10 +12,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.AdminCitiesPage;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.SignupPage;
+import pages.*;
 
 import java.time.Duration;
 import java.util.List;
@@ -28,35 +25,45 @@ public class BaseTest {
     protected WebDriverWait driverWait;
     protected SignupPage signupPage;
     protected AdminCitiesPage adminCitiesPage;
+    protected AuthRoutesPage authRoutesPage;
+    protected LocalePage localePage;
+    protected ProfilePage profilePage;
 
     @BeforeClass
-    public void beforeClass () {
+    public void beforeClass() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Korisnik\\IdeaProjects\\chromedriver.exe");
         driver = new ChromeDriver();
-        driverWait=new WebDriverWait(driver, Duration.ofSeconds(5));
+        driverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         loginPage = new LoginPage(driver, driverWait);
         signupPage = new SignupPage(driver, driverWait);
         homePage = new HomePage(driver, driverWait);
         adminCitiesPage = new AdminCitiesPage(driver, driverWait);
+        authRoutesPage = new AuthRoutesPage(driver, driverWait);
+        localePage = new LocalePage(driver, driverWait);
+        profilePage = new ProfilePage(driver, driverWait);
+
+
+
     }
+
     @BeforeMethod
     public void beforeMethod() {
         driver.get("https://vue-demo.daniel-avellaneda.com");
     }
 
-//    @AfterMethod
-//    public void afterMethod() {
-//        List <WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
-//        if(logout.size() == 1) {
-//            logout.get(0).click();
-//        }
+    @AfterMethod
+    public void afterMethod() {
+        List<WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
+        if (logout.size() == 1) {
+            logout.get(0).click();
+        }
 
 
-//    }
+    }
+
+
 }
-
-
 
 
 
