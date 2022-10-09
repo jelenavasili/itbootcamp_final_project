@@ -59,8 +59,7 @@ public class AdminCitiesPage extends BasePage {
     }
     public void editCity() {
         getEditCity().click();
-           getName().sendKeys(" - edited");
+        getName().sendKeys(" - edited");
         getSave().click();
-
     }
 }

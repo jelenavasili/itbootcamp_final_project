@@ -42,9 +42,7 @@ public class BaseTest {
         authRoutesPage = new AuthRoutesPage(driver, driverWait);
         localePage = new LocalePage(driver, driverWait);
         profilePage = new ProfilePage(driver, driverWait);
-
-
-
+        faker = new Faker();
     }
 
     @BeforeMethod
@@ -52,18 +50,10 @@ public class BaseTest {
         driver.get("https://vue-demo.daniel-avellaneda.com");
     }
 
-    @AfterMethod
-    public void afterMethod() {
-        List<WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
-        if (logout.size() == 1) {
-            logout.get(0).click();
-        }
-
-
-    }
-
-
 }
+
+
+
 
 
 

@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class SignupTests extends BaseTest {
 
-    @Test
+    @Test (priority = 0)
     public void visitSignupPage () {
         homePage.openSignupPage();
         String expectedResult = "https://vue-demo.daniel-avellaneda.com/signup";
@@ -18,7 +18,7 @@ public class SignupTests extends BaseTest {
         Assert.assertEquals(expectedResult, actualResult);
     }
 
-    @Test
+    @Test (priority = 1)
     public void checkInputTypes () {
         homePage.openSignupPage();
         String expectedResult = "text";
@@ -38,7 +38,7 @@ public class SignupTests extends BaseTest {
         Assert.assertEquals(actualResult3, expectedResult3);
     }
 
-    @Test
+    @Test (priority = 1)
     public void displayErrorsWhenUserAlreadyExists() {
         homePage.openSignupPage();
         signupPage.signup("Test Test", "admin@admin.com", "123654", "123654");
@@ -51,11 +51,10 @@ public class SignupTests extends BaseTest {
         Assert.assertEquals(actualResult1, expectedResult1);
     }
 
-    @Test
+    @Test (priority = 1)
     public void signUp() {
         homePage.openSignupPage();
-        Faker faker = new Faker();
-        String name= String.valueOf(faker.name());
+        String name = faker.name().name();
         String email = faker.internet().emailAddress();
         String password = faker.internet().password();
         String confirmPassword = password;
@@ -66,7 +65,7 @@ public class SignupTests extends BaseTest {
         WebElement actualResult = driver.findElement(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"));
         String expectedResult = "IMPORTANT: Verify your account";
         Assert.assertEquals(actualResult.getText(), expectedResult);
-        //loginPage.logout();
+
     }
 
 

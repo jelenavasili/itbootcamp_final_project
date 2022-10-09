@@ -5,7 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class LoginTests extends BaseTest {
     @Test
@@ -22,7 +25,6 @@ public class LoginTests extends BaseTest {
     @Test
     public void displaysErrorsWhenUserDoesNotExist() {
         homePage.login();
-        Faker faker = new Faker();
         String email = faker.internet().emailAddress();
         String password = faker.internet().password();
 
@@ -91,6 +93,13 @@ public class LoginTests extends BaseTest {
 
         String expectedResult1 = "https://vue-demo.daniel-avellaneda.com/login";
         Assert.assertEquals(expectedResult1, driver.getCurrentUrl());
+    }
+    @AfterMethod
+    public void afterMethod() {
+        List<WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
+        if (logout.size() == 1) {
+            logout.get(0).click();
+        }
     }
 
 }

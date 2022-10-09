@@ -5,7 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class AdminCitiesTests extends BaseTest {
 
@@ -87,6 +90,13 @@ public class AdminCitiesTests extends BaseTest {
         WebElement message = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
         Assert.assertTrue(message.getText().contains("Deleted successfully"));
 
+    }
+    @AfterMethod
+    public void afterMethod() {
+        List<WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
+        if (logout.size() == 1) {
+            logout.get(0).click();
+        }
     }
 }
 
