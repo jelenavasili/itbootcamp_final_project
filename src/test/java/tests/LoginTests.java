@@ -22,7 +22,6 @@ public class LoginTests extends BaseTest {
 
         Assert.assertEquals(actualResult, expectedResult);
     }
-
     @Test
     public void displaysErrorsWhenUserDoesNotExist() {
         homePage.login();
@@ -77,16 +76,14 @@ public class LoginTests extends BaseTest {
         loginPage.login("admin@admin.com", "12345");
 
         WebElement logoutBtn = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
-
         Assert.assertTrue(logoutBtn.isDisplayed());
-
         logoutBtn.click();
+
         String expectedResult = "https://vue-demo.daniel-avellaneda.com/login";
         String actualResult = driver.getCurrentUrl();
         Assert.assertEquals(expectedResult, actualResult);
 
         driver.get("https://vue-demo.daniel-avellaneda.com/home");
-
         String expectedResult1 = "https://vue-demo.daniel-avellaneda.com/login";
         Assert.assertEquals(expectedResult1, driver.getCurrentUrl());
     }

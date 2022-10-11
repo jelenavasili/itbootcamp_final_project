@@ -48,6 +48,5 @@ public class ProfileTests extends BaseTest{
         String expectedResult5= github;
         String actualResult5 = driver.findElement(By.id("urlGitHub")).getAttribute("value");
         Assert.assertEquals(actualResult5, expectedResult5);
-
     }
 }
