@@ -1,6 +1,5 @@
 package tests;
 
-import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,7 +10,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class AdminCitiesTests extends BaseTest {
-
     @Test
     public void visitAdminCitiesPageAndListCities() {
         homePage.login();
@@ -23,7 +21,6 @@ public class AdminCitiesTests extends BaseTest {
         String actualResult = driver.getCurrentUrl();
 
         Assert.assertEquals(actualResult, expectedResult);
-
         Assert.assertTrue(adminCitiesPage.getLogout().isDisplayed());
     }
     @Test
@@ -34,11 +31,9 @@ public class AdminCitiesTests extends BaseTest {
         adminCitiesPage.cities();
         adminCitiesPage.newItem();
 
-        WebElement actualResult = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
-
+        WebElement actualResult = adminCitiesPage.getMsgSavedSuccessfully();
         Assert.assertTrue(actualResult.getText().contains("Saved successfully"));
     }
-
     @Test
     public void editCity() {
         homePage.login();
@@ -47,10 +42,8 @@ public class AdminCitiesTests extends BaseTest {
         adminCitiesPage.cities();
         adminCitiesPage.editCity();
 
-        WebElement message = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
-
+        WebElement message = adminCitiesPage.getMsgSavedSuccessfully();
         Assert.assertTrue(message.getText().contains("Saved successfully"));
-
     }
     @Test
     public void searchCity() {
@@ -63,10 +56,9 @@ public class AdminCitiesTests extends BaseTest {
         WebElement search = driver.findElement(By.id("search"));
         search.clear();
 
-        WebElement city = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]"));
+        WebElement city = adminCitiesPage.getSearchedCity();
         search.sendKeys(city.getText());
         Assert.assertTrue(city.isDisplayed());
-
     }
     @Test
     public void deleteCity() {
@@ -75,21 +67,20 @@ public class AdminCitiesTests extends BaseTest {
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
 
-        WebElement city = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]"));
+        WebElement city = adminCitiesPage.getSearchedCity();
         WebElement search = driver.findElement(By.id("search"));
         search.clear();
         search.sendKeys(city.getText());
 
-        WebElement delete = driver.findElement(By.xpath("//*[@id=\"delete\"]/span"));
+        WebElement delete = adminCitiesPage.getDeleteCity();
         delete.click();
 
-        WebElement deleteDialog = driver.findElement(By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span"));
+        WebElement deleteDialog = adminCitiesPage.getDeleteDialog();
         deleteDialog.click();
 
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")));
-        WebElement message = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
+        WebElement message = adminCitiesPage.getMsgDeletedSuccessfully();
         Assert.assertTrue(message.getText().contains("Deleted successfully"));
-
     }
     @AfterMethod
     public void afterMethod() {

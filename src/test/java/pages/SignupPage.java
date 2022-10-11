@@ -11,6 +11,9 @@ public class SignupPage extends BasePage {
     private By password = By.id("password");
     private By confirmPassword = By.id("confirmPassword");
     private By signupBtn = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button/span");
+    private By msgEmailAlereadyExists = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/div/div/div/div/div[1]/ul/li");
+    private By msgIMPORTANT = By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]");
+    private By closeButtonIMPORTANT = By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[3]/button/span");
 
     public SignupPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
@@ -30,6 +33,15 @@ public class SignupPage extends BasePage {
     }
     public WebElement getSignUpBtn () {
         return getDriver().findElement(signupBtn);
+    }
+    public WebElement msgEmailAlreadyExists () {
+        return getDriver().findElement(msgEmailAlereadyExists);
+    }
+    public WebElement msgIMPORTANT () {
+        return  getDriver().findElement(msgIMPORTANT);
+    }
+    public WebElement closeButtonIMPORTANT () {
+        return getDriver().findElement(closeButtonIMPORTANT);
     }
 
     public void signup(String name, String email, String password, String confirmPassword) {

@@ -1,21 +1,11 @@
 package tests;
-
 import com.github.javafaker.Faker;
-import org.checkerframework.checker.units.qual.A;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.*;
-
 import java.time.Duration;
-import java.util.List;
 
 public class BaseTest {
     protected LoginPage loginPage;
@@ -35,6 +25,7 @@ public class BaseTest {
         driver = new ChromeDriver();
         driverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().window().maximize();
         loginPage = new LoginPage(driver, driverWait);
         signupPage = new SignupPage(driver, driverWait);
         homePage = new HomePage(driver, driverWait);
@@ -49,8 +40,12 @@ public class BaseTest {
     public void beforeMethod() {
         driver.get("https://vue-demo.daniel-avellaneda.com");
     }
-
+    @AfterClass
+    public void afterClass () {
+        driver.quit();
+    }
 }
+
 
 
 

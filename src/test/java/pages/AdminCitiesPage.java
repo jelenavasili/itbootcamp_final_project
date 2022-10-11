@@ -2,20 +2,28 @@ package pages;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.image.Kernel;
+
 public class AdminCitiesPage extends BasePage {
-    protected By admin = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]");
-    protected By cities = By.xpath("//*[@id=\"app\"]/div[3]/div[1]/a[1]");
-    protected By newItem = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[1]/div[3]/form/div[1]/button/span");
-    protected By name = By.id("name");
-    protected Faker faker = new Faker();
-    protected By save = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[3]/button[2]/span");
-    protected By logout = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span");
+    private By admin = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]");
+    private By cities = By.xpath("//*[@id=\"app\"]/div[3]/div[1]/a[1]");
+    private By newItem = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[1]/div[3]/form/div[1]/button/span");
+    private By name = By.id("name");
+    private Faker faker = new Faker();
+    private By save = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[3]/button[2]/span");
+    private By logout = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span");
     private String city;
-    protected By editCity = By.id("edit");
+    private By editCity = By.id("edit");
+    private By msgSavedSuccessfully = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]");
+    private By searchedCity = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]");
+    private By deleteCity = By.xpath("//*[@id=\"delete\"]/span");
+    private By deleteDialog = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span");
+    private By msgDeletesSuccessfully = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]");
 
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait driverWait) {
@@ -43,6 +51,22 @@ public class AdminCitiesPage extends BasePage {
     public WebElement getEditCity() {
         return getDriver().findElement(editCity);
     }
+    public WebElement getMsgSavedSuccessfully () {
+        return getDriver().findElement(msgSavedSuccessfully);
+    }
+    public WebElement getSearchedCity() {
+        return getDriver().findElement(searchedCity);
+    }
+    public WebElement getDeleteCity () {
+        return getDriver().findElement(deleteCity);
+    }
+    public WebElement getDeleteDialog () {
+        return getDriver().findElement(deleteDialog);
+    }
+    public WebElement getMsgDeletedSuccessfully () {
+        return getDriver().findElement(msgDeletesSuccessfully);
+    }
+
 
     public void adminClick () {
         getAdmin().click();
@@ -59,7 +83,8 @@ public class AdminCitiesPage extends BasePage {
     }
     public void editCity() {
         getEditCity().click();
-        getName().sendKeys(" - edited");
+        getName().sendKeys(Keys.CONTROL + "a", Keys.DELETE);
+        getName().sendKeys(faker.address().city());
         getSave().click();
     }
 }

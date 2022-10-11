@@ -64,7 +64,6 @@ public class ProfilePage extends BasePage {
         getSave().click();
     }
 
-
     public void createProfile(String name, String phone, String country, String twitter, String github) {
         WebElement nameElement = getName();
         nameElement.click();
