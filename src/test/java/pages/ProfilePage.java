@@ -65,36 +65,25 @@ public class ProfilePage extends BasePage {
     }
 
     public void createProfile(String name, String phone, String country, String twitter, String github) {
-        WebElement nameElement = getName();
-        nameElement.click();
 
-        nameElement.sendKeys(Keys.CONTROL + "a");
-        nameElement.sendKeys(Keys.DELETE);
-        nameElement.sendKeys(name);
+        getName().click();
+        getName().sendKeys(Keys.CONTROL + "a", Keys.DELETE);
+        getName().sendKeys(name);
 
-        WebElement phoneElement = getPhone();
-        phoneElement.click();
-        phoneElement.sendKeys(Keys.CONTROL + "a");
-        phoneElement.sendKeys(Keys.DELETE);
-        phoneElement.sendKeys(phone);
+        getPhone().click();
+        getPhone().sendKeys(Keys.CONTROL + "a", Keys.DELETE);
+        getPhone().sendKeys(phone);
 
-        WebElement countryElement = getCountry();
-        countryElement.click();
-        countryElement.sendKeys(Keys.CONTROL + "a");
-        countryElement.sendKeys(Keys.DELETE);
-        countryElement.sendKeys(country);
+        getCountry().click();
+        getCountry().sendKeys(Keys.CONTROL + "a", Keys.DELETE);
+        getCountry().sendKeys(country);
 
-        WebElement twitterElement = getTwitter();
-        twitterElement.click();
-        twitterElement.sendKeys(Keys.CONTROL + "a");
-        twitterElement.sendKeys(Keys.DELETE);
-        twitterElement.sendKeys(twitter);
+        getTwitter().click();
+        getTwitter().sendKeys(Keys.CONTROL + "a", Keys.DELETE);
+        getTwitter().sendKeys(twitter);
 
-        WebElement githubElement = getGithub();
-        githubElement.click();
-        githubElement.sendKeys(Keys.CONTROL + "a");
-        githubElement.sendKeys(Keys.DELETE);
-        githubElement.sendKeys(github);
-
+        getGithub().click();
+        getGithub().sendKeys(Keys.CONTROL + "a", Keys.DELETE);
+        getGithub().sendKeys(github);
     }
 }

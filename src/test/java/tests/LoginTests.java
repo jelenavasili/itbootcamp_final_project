@@ -6,11 +6,16 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-
 import java.util.List;
 
 public class LoginTests extends BaseTest {
-
+    @Test
+    public void loginPageVisit() {
+        homePage.login();
+        String expectedResult = "https://vue-demo.daniel-avellaneda.com/login";
+        String actualResult = driver.getCurrentUrl();
+        Assert.assertEquals(expectedResult, actualResult);
+    }
     @Test
     public void login () {
         homePage.login();
@@ -38,13 +43,7 @@ public class LoginTests extends BaseTest {
         String actualResult1 = driver.getCurrentUrl();
         Assert.assertEquals(expectedResult1, actualResult1);
     }
-    @Test
-    public void loginPageVisit() {
-    homePage.login();
-        String expectedResult = "https://vue-demo.daniel-avellaneda.com/login";
-        String actualResult = driver.getCurrentUrl();
-        Assert.assertEquals(expectedResult, actualResult);
-    }
+
     @Test
     public void checkInputTypes () {
         homePage.login();
@@ -75,7 +74,8 @@ public class LoginTests extends BaseTest {
         driver.get("https://vue-demo.daniel-avellaneda.com/home");
         loginPage.login("admin@admin.com", "12345");
 
-        WebElement logoutBtn = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
+        WebElement logoutBtn = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]"));
+       // WebElement logoutBtn = loginPage.getLogoutBtn();
         Assert.assertTrue(logoutBtn.isDisplayed());
         logoutBtn.click();
 
@@ -89,9 +89,10 @@ public class LoginTests extends BaseTest {
     }
     @AfterMethod
     public void afterMethod() {
-        List<WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]"));
+        List<WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]"));
         if (logout.size() == 1) {
             logout.get(0).click();
         }
+    }
    }
-}
+

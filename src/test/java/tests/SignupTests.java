@@ -9,11 +9,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
+import javax.swing.*;
 import java.util.List;
 
 public class SignupTests extends BaseTest {
-
-
 
     @Test
     public void checkInputTypes () {
@@ -64,7 +63,7 @@ public class SignupTests extends BaseTest {
         String confirmPassword = password;
 
         signupPage.signup(name, email, password, confirmPassword);
-
+       // signupPage.signup(faker.name().name(), faker.internet().emailAddress(), faker.internet().password(), faker.internet().password());
         driverWait.until(ExpectedConditions.textToBe(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"),"IMPORTANT: Verify your account" ));
         WebElement actualResult = signupPage.msgIMPORTANT();
         String expectedResult = "IMPORTANT: Verify your account";

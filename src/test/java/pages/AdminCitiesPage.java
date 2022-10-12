@@ -7,23 +7,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.image.Kernel;
-
 public class AdminCitiesPage extends BasePage {
     private By admin = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]");
     private By cities = By.xpath("//*[@id=\"app\"]/div[3]/div[1]/a[1]");
     private By newItem = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[1]/div[3]/form/div[1]/button/span");
     private By name = By.id("name");
-    private Faker faker = new Faker();
     private By save = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[3]/button[2]/span");
     private By logout = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span");
-    private String city;
     private By editCity = By.id("edit");
     private By msgSavedSuccessfully = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]");
     private By searchedCity = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]");
     private By deleteCity = By.xpath("//*[@id=\"delete\"]/span");
     private By deleteDialog = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span");
     private By msgDeletesSuccessfully = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]");
+    private By searchField = By.id("search");
 
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait driverWait) {
@@ -66,25 +63,24 @@ public class AdminCitiesPage extends BasePage {
     public WebElement getMsgDeletedSuccessfully () {
         return getDriver().findElement(msgDeletesSuccessfully);
     }
-
-
+    public WebElement getSearchField () {
+        return getDriver().findElement(searchField);
+    }
     public void adminClick () {
         getAdmin().click();
     }
-
     public void cities() {
         getCities().click();
     }
-    public void newItem() {
+public void newItem(String city) {
         getNewItem().click();
-        city = faker.address().city();
         getName().sendKeys(city);
         getSave().click();
     }
-    public void editCity() {
+    public void editCity(String city) {
         getEditCity().click();
         getName().sendKeys(Keys.CONTROL + "a", Keys.DELETE);
-        getName().sendKeys(faker.address().city());
+        getName().sendKeys(city);
         getSave().click();
     }
 }

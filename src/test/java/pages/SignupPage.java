@@ -1,5 +1,6 @@
 package pages;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,7 @@ public class SignupPage extends BasePage {
     private By msgEmailAlereadyExists = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/div/div/div/div/div[1]/ul/li");
     private By msgIMPORTANT = By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]");
     private By closeButtonIMPORTANT = By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[3]/button/span");
+   // private Faker faker = new Faker();
 
     public SignupPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
@@ -45,19 +47,10 @@ public class SignupPage extends BasePage {
     }
 
     public void signup(String name, String email, String password, String confirmPassword) {
-    WebElement nameElement = getName();
-    nameElement.sendKeys(name);
-
-    WebElement emailElement = getEmail();
-    emailElement.sendKeys(email);
-
-    WebElement passwordElement = getPassword();
-    passwordElement.sendKeys(password);
-
-    WebElement confirmPasswordElement = getConfirmPassword();
-    confirmPasswordElement.sendKeys(confirmPassword);
-
-    WebElement signupBtnElement = getSignUpBtn();
-    signupBtnElement.click();
+        getName().sendKeys(name);
+        getEmail().sendKeys(email);
+        getPassword().sendKeys(password);
+        getConfirmPassword().sendKeys(confirmPassword);
+        getSignUpBtn().click();
     }
 }

@@ -1,6 +1,7 @@
 package tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -10,6 +11,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class AdminCitiesTests extends BaseTest {
+
     @Test
     public void visitAdminCitiesPageAndListCities() {
         homePage.login();
@@ -29,7 +31,7 @@ public class AdminCitiesTests extends BaseTest {
         loginPage.login("admin@admin.com", "12345");
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
-        adminCitiesPage.newItem();
+        adminCitiesPage.newItem(faker.address().city());
 
         WebElement actualResult = adminCitiesPage.getMsgSavedSuccessfully();
         Assert.assertTrue(actualResult.getText().contains("Saved successfully"));
@@ -40,7 +42,7 @@ public class AdminCitiesTests extends BaseTest {
         loginPage.login("admin@admin.com", "12345");
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
-        adminCitiesPage.editCity();
+        adminCitiesPage.editCity(faker.address().city());
 
         WebElement message = adminCitiesPage.getMsgSavedSuccessfully();
         Assert.assertTrue(message.getText().contains("Saved successfully"));
@@ -51,9 +53,9 @@ public class AdminCitiesTests extends BaseTest {
         loginPage.login("admin@admin.com", "12345");
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
-        adminCitiesPage.editCity();
+        adminCitiesPage.editCity(faker.address().city());
 
-        WebElement search = driver.findElement(By.id("search"));
+        WebElement search = adminCitiesPage.getSearchField();
         search.clear();
 
         WebElement city = adminCitiesPage.getSearchedCity();
@@ -68,7 +70,7 @@ public class AdminCitiesTests extends BaseTest {
         adminCitiesPage.cities();
 
         WebElement city = adminCitiesPage.getSearchedCity();
-        WebElement search = driver.findElement(By.id("search"));
+        WebElement search = adminCitiesPage.getSearchField();
         search.clear();
         search.sendKeys(city.getText());
 
