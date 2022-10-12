@@ -24,7 +24,6 @@ public class LoginTests extends BaseTest {
         String expectedResult = "https://vue-demo.daniel-avellaneda.com/home";  //verify url contins /home route
         driverWait.until(ExpectedConditions.urlMatches("https://vue-demo.daniel-avellaneda.com/home"));
         String actualResult= driver.getCurrentUrl();
-
         Assert.assertEquals(actualResult, expectedResult);
     }
     @Test
@@ -75,7 +74,6 @@ public class LoginTests extends BaseTest {
         loginPage.login("admin@admin.com", "12345");
 
         WebElement logoutBtn = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]"));
-       // WebElement logoutBtn = loginPage.getLogoutBtn();
         Assert.assertTrue(logoutBtn.isDisplayed());
         logoutBtn.click();
 

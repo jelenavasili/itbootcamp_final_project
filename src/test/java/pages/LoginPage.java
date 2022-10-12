@@ -17,7 +17,6 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
-
     public WebElement getEmail() {
         return getDriver().findElement(email);
     }

@@ -19,7 +19,6 @@ public class ProfileTests extends BaseTest{
         String github = "https://" + faker.internet().url();
 
         profilePage.createProfile(name, phone, country, twitter, github);
-
         profilePage.saveProfile();
 
         WebElement message = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]"));

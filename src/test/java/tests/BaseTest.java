@@ -18,7 +18,6 @@ public class BaseTest {
     protected AuthRoutesPage authRoutesPage;
     protected LocalePage localePage;
     protected ProfilePage profilePage;
-
     @BeforeClass
     public void beforeClass() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Korisnik\\IdeaProjects\\chromedriver.exe");
@@ -35,7 +34,6 @@ public class BaseTest {
         profilePage = new ProfilePage(driver, driverWait);
         faker = new Faker();
     }
-
     @BeforeMethod
     public void beforeMethod() {
         driver.get("https://vue-demo.daniel-avellaneda.com");

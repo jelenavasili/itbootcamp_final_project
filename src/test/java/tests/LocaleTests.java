@@ -13,7 +13,6 @@ public class LocaleTests extends BaseTest{
         String expectedResult = "Página de aterrizaje";
         Assert.assertEquals(headingEs.getText(), expectedResult);
     }
-
     @Test
     public void setLocaleToEN () {
         localePage.clickLocale();

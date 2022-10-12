@@ -1,16 +1,9 @@
 package tests;
-
-import com.github.javafaker.Faker;
-import com.github.javafaker.Name;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-
-import javax.swing.*;
-import java.util.List;
 
 public class SignupTests extends BaseTest {
 
@@ -53,7 +46,6 @@ public class SignupTests extends BaseTest {
         String actualResult = driver.getCurrentUrl();
         Assert.assertEquals(expectedResult, actualResult);
     }
-
     @Test
     public void signUp() {
         homePage.openSignupPage();
@@ -63,7 +55,6 @@ public class SignupTests extends BaseTest {
         String confirmPassword = password;
 
         signupPage.signup(name, email, password, confirmPassword);
-       // signupPage.signup(faker.name().name(), faker.internet().emailAddress(), faker.internet().password(), faker.internet().password());
         driverWait.until(ExpectedConditions.textToBe(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"),"IMPORTANT: Verify your account" ));
         WebElement actualResult = signupPage.msgIMPORTANT();
         String expectedResult = "IMPORTANT: Verify your account";
@@ -71,6 +62,5 @@ public class SignupTests extends BaseTest {
         WebElement closeBtn = signupPage.closeButtonIMPORTANT();
         closeBtn.click();
         loginPage.getLogoutBtn().click();
-
     }
 }
