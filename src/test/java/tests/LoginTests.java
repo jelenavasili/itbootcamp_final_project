@@ -1,13 +1,8 @@
 package tests;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 public class LoginTests extends BaseTest {
     @Test
@@ -26,6 +21,7 @@ public class LoginTests extends BaseTest {
         driverWait.until(ExpectedConditions.urlMatches("https://vue-demo.daniel-avellaneda.com/home"));
         String actualResult= driver.getCurrentUrl();
         Assert.assertEquals(actualResult, expectedResult);
+        loginPage.getLogoutBtn().click();
     }
     @Test
     public void displaysErrorsWhenUserDoesNotExist() {
@@ -73,7 +69,7 @@ public class LoginTests extends BaseTest {
         homePage.login();
         loginPage.login("admin@admin.com", "12345");
 
-        WebElement logoutBtn = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]/span"));
+        WebElement logoutBtn = loginPage.getLogoutBtn();
         Assert.assertTrue(logoutBtn.isDisplayed());
         logoutBtn.click();
 
@@ -84,14 +80,6 @@ public class LoginTests extends BaseTest {
         driver.get("https://vue-demo.daniel-avellaneda.com/home");
         String expectedResult1 = "https://vue-demo.daniel-avellaneda.com/login";
         Assert.assertEquals(expectedResult1, driver.getCurrentUrl());
-        loginPage.getLogoutBtn().click();
-    }
-    @AfterMethod
-    public void afterMethod() {
-        List<WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]/span"));
-        if (logout.size() == 1) {
-            logout.get(0).click();
-        }
     }
    }
 
