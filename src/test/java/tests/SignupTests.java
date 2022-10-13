@@ -3,10 +3,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import java.util.List;
 
 public class SignupTests extends BaseTest {
+    @Test
+    public void visitSignupPage () {
 
+        homePage.openSignupPage();
+        String expectedResult = "https://vue-demo.daniel-avellaneda.com/signup";
+        String actualResult = driver.getCurrentUrl();
+        Assert.assertEquals(actualResult, expectedResult);
+    }
     @Test
     public void checkInputTypes () {
         homePage.openSignupPage();
@@ -39,13 +48,7 @@ public class SignupTests extends BaseTest {
         String actualResult1 = driver.getCurrentUrl();
         Assert.assertEquals(actualResult1, expectedResult1);
     }
-    @Test
-    public void visitSignupPage () {
-        homePage.openSignupPage();
-        String expectedResult = "https://vue-demo.daniel-avellaneda.com/signup";
-        String actualResult = driver.getCurrentUrl();
-        Assert.assertEquals(expectedResult, actualResult);
-    }
+
     @Test
     public void signUp() {
         homePage.openSignupPage();
@@ -61,6 +64,12 @@ public class SignupTests extends BaseTest {
         Assert.assertEquals(actualResult.getText(), expectedResult);
         WebElement closeBtn = signupPage.closeButtonIMPORTANT();
         closeBtn.click();
-        loginPage.getLogoutBtn().click();
+    }
+    @AfterMethod
+    public void afterMethod() {
+        List<WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]/span"));
+        if (logout.size() == 1) {
+            logout.get(0).click();
+        }
     }
 }
