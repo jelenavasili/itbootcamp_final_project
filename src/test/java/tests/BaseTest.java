@@ -38,10 +38,10 @@ public class BaseTest {
     public void beforeMethod() {
         driver.get("https://vue-demo.daniel-avellaneda.com");
     }
-//    @AfterClass
-//    public void afterClass () {
-//        driver.quit();
-//    }
+    @AfterClass
+    public void afterClass () {
+        driver.quit();
+    }
 }
 
 

@@ -2,6 +2,7 @@ package tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -70,10 +71,9 @@ public class LoginTests extends BaseTest {
     @Test
     public void logout() {
         homePage.login();
-        driver.get("https://vue-demo.daniel-avellaneda.com/home");
         loginPage.login("admin@admin.com", "12345");
 
-        WebElement logoutBtn = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]"));
+        WebElement logoutBtn = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]/span"));
         Assert.assertTrue(logoutBtn.isDisplayed());
         logoutBtn.click();
 
@@ -84,10 +84,11 @@ public class LoginTests extends BaseTest {
         driver.get("https://vue-demo.daniel-avellaneda.com/home");
         String expectedResult1 = "https://vue-demo.daniel-avellaneda.com/login";
         Assert.assertEquals(expectedResult1, driver.getCurrentUrl());
+        loginPage.getLogoutBtn().click();
     }
     @AfterMethod
     public void afterMethod() {
-        List<WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]"));
+        List<WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]/span"));
         if (logout.size() == 1) {
             logout.get(0).click();
         }
